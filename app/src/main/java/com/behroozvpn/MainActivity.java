@@ -1,0 +1,48 @@
+
+package com.behroozvpn;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Button;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setGravity(Gravity.CENTER);
+        layout.setPadding(30, 30, 30, 30);
+        layout.setBackgroundColor(Color.rgb(20, 30, 50));
+
+        TextView title = new TextView(this);
+        title.setText("BEHROOZ VPN");
+        title.setTextSize(30);
+        title.setTextColor(Color.WHITE);
+        title.setGravity(Gravity.CENTER);
+
+        TextView status = new TextView(this);
+        status.setText("وضعیت: قطع");
+        status.setTextSize(20);
+        status.setTextColor(Color.WHITE);
+        status.setGravity(Gravity.CENTER);
+
+        Button connect = new Button(this);
+        connect.setText("اتصال");
+        connect.setOnClickListener(v ->
+            status.setText("هنوز سرور VPN تنظیم نشده است")
+        );
+
+        layout.addView(title);
+        layout.addView(status);
+        layout.addView(connect);
+
+        setContentView(layout);
+    }
+}
