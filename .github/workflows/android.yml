@@ -3,7 +3,7 @@ name: ساخت APK اندروید
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -21,12 +21,21 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: "17"
 
       - name: آماده‌سازی Gradle
         uses: gradle/gradle-build-action@v3
         with:
-          gradle-version: '8.11.1'
+          gradle-version: "8.11.1"
+
+      - name: بررسی مسیر فایل‌ها
+        run: |
+          pwd
+          ls -la
+          ls -la app
+          ls -la app/src
+          ls -la app/src/main
+          test -f app/src/main/AndroidManifest.xml
 
       - name: ساخت APK
         run: gradle assembleDebug
@@ -36,3 +45,4 @@ jobs:
         with:
           name: BehroozVPN-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
