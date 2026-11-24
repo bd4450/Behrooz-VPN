@@ -28,30 +28,23 @@ jobs:
         with:
           gradle-version: "8.11.1"
 
-      - name: نصب ابزار بررسی XML
+      - name: بررسی فایل XML
         run: |
           sudo apt-get update
           sudo apt-get install -y libxml2-utils
+          xmllint --noout app/src/main/AndroidManifest.xml
 
-      - name: بررسی فایل AndroidManifest
+      - name: نمایش فایل‌های پروژه
         run: |
-          echo "Checking AndroidManifest.xml"
-          if xmllint --noout app/src/main/AndroidManifest.xml; then
-            echo "XML is valid"
-          else
-            echo "XML has an error"
-            nl -ba app/src/main/AndroidManifest.xml
-            exit 1
-          fi
-
-      - name: نمایش محتوای Manifest
-        run: |
-          nl -ba app/src/main/AndroidManifest.xml
+          echo "Project files:"
+          ls -la
+          echo "App files:"
+          ls -la app
 
       - name: ساخت APK
         run: gradle assembleDebug --stacktrace
 
-      - name: ذخیره فایل APK
+      - name: ذخیره APK
         uses: actions/upload-artifact@v4
         with:
           name: BehroozVPN-APK
