@@ -14,15 +14,19 @@
         android:usesCleartextTraffic="false"
         android:supportsRtl="true">
 
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".MyVpnService"
             android:permission="android.permission.BIND_VPN_SERVICE"
-            android:exported="true"
-            android:foregroundServiceType="specialUse">
-
-            <property
-                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="VPN connection service" />
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.net.VpnService" />
@@ -31,5 +35,4 @@
         </service>
 
     </application>
-
 </manifest>
